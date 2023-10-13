@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_gravity="fill"
+    tools:context=".MainActivity">
+
+    <GridLayout
+        android:id="@+id/gridLayout"
+        style="@style/LayoutGrid_style"
+        android:columnCount="5"
+        android:rowCount="5">
+
+        <TextView
+            android:id="@+id/textView1"
+            style="@style/TextView_style"
+            android:text="1"
+            android:layout_row="0"
+            android:layout_column="0" />
+
+        <TextView
+            android:id="@+id/textView2"
+            style="@style/TextView_style"
+            android:text="2"
+            android:layout_row="0"
+            android:layout_column="1" />
+
+        <TextView
+            android:id="@+id/textView3"
+            style="@style/TextView_style"
+            android:text="3"
+            android:layout_row="0"
+            android:layout_column="2" />
+        <TextView
+            android:id="@+id/textView4"
+            style="@style/TextView_style"
+            android:text="4"
+            android:layout_row="0"
+            android:layout_column="3" />
+
+        <TextView
+            android:id="@+id/textView5"
+            style="@style/TextView_style"
+            android:text="5"
+            android:layout_row="0"
+            android:layout_column="4" />
+        <TextView
+            android:id="@+id/textView6"
+            style="@style/TextView_style"
+            android:text="1"
+            android:layout_row="1"
+            android:layout_column="0" />
+
+        <TextView
+            android:id="@+id/textView7"
+            style="@style/TextView_style"
+            android:text="2"
+            android:layout_row="1"
+            android:layout_column="1" />
+
+        <TextView
+            android:id="@+id/textView8"
+            style="@style/TextView_style"
+            android:text="3"
+            android:layout_row="1"
+            android:layout_column="2" />
+
+        <TextView
+            android:id="@+id/textView9"
+            style="@style/TextView_style"
+            android:text="4"
+            android:layout_row="1"
+            android:layout_column="3" />
+
+        <TextView
+            android:id="@+id/textView10"
+            style="@style/TextView_style"
+            android:text="5"
+            android:layout_row="1"
+            android:layout_column="4" />
+
+    </GridLayout>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:text="Q"
+                style="@style/Keyboard_style" />
+
+            <Button
+                android:text="W"
+                style="@style/Keyboard_style"/>
+
+            <Button
+                android:text="E"
+                style="@style/Keyboard_style"/>
+
+            <Button
+                android:text="R"
+                style="@style/Keyboard_style"/>
+
+            <Button
+                android:text="T"
+                style="@style/Keyboard_style" />
+
+            <Button
+                android:text="Y"
+                style="@style/Keyboard_style"/>
+
+            <Button
+                android:text="U"
+                style="@style/Keyboard_style"/>
+
+            <Button
+                android:text="I"
+                style="@style/Keyboard_style" />
+
+            <Button
+                android:text="O"
+                style="@style/Keyboard_style"/>
+
+            <Button
+                android:text="P"
+                style="@style/Keyboard_style" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:text="A"
+                style="@style/Keyboard_style"/>
+
+            <Button
+                android:text="S"
+                style="@style/Keyboard_style"/>
+
+            <Button
+                android:text="D"
+                style="@style/Keyboard_style"/>
+
+            <Button
+                android:text="F"
+                style="@style/Keyboard_style" />
+
+            <Button
+                android:text="G"
+                style="@style/Keyboard_style" />
+
+            <Button
+                android:text="H"
+                style="@style/Keyboard_style"/>
+
+
+            <Button
+                android:text="J"
+                style="@style/Keyboard_style" />
+
+            <Button
+                android:text="K"
+                style="@style/Keyboard_style"/>
+
+            <Button
+                android:text="L"
+                style="@style/Keyboard_style"/>
+
+        </LinearLayout>
+
+            <!-- Linha 3 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:text="Ç"
+                style="@style/Keyboard_style"/>
+
+            <Button
+                android:text="Z"
+                style="@style/Keyboard_style"/>
+
+            <Button
+                android:text="X"
+                style="@style/Keyboard_style"/>
+
+            <Button
+                android:text="C"
+                style="@style/Keyboard_style"/>
+
+            <Button
+                android:text="V"
+                style="@style/Keyboard_style"/>
+
+            <Button
+                android:text="B"
+                style="@style/Keyboard_style"/>
+
+            <Button
+                android:text="N"
+                style="@style/Keyboard_style"/>
+
+            <Button
+                android:text="M"
+                style="@style/Keyboard_style"/>
+
+        </LinearLayout>
+
+</LinearLayout>

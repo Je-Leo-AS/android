@@ -21,8 +21,9 @@ public class MainActivity extends AppCompatActivity {
     private TextView resultTextView, expressionTextView;
     private StringBuilder input = new StringBuilder(); // Declare the 'input' variable
 
-    private double num1 = 0;
+    private double num1;
     private double num2 = 0;
+    private double ans = 0;
     private char operation = ' ';
     public String operationAct;
     private double result;
@@ -52,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
 
         input.append(buttonText);
 
-        // Update the TextView to display the current input
         expressionTextView.setText(input.toString());
     }
 
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
     public void onEqualClick(View view) {
         if (input.length() > 0) {
             num2 = Double.parseDouble(input.toString());
-            newInput = true; // Set the flag for a new input
+            newInput = true;
         }
 
         // Chamada da função performCalculation com a operação
