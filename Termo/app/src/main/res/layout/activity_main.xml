@@ -429,7 +429,7 @@
             android:layout_marginTop="2dp"
             android:background="@drawable/buttons_icon"
             android:onClick="onClickClear"
-            android:text="Clear"
+            android:text="del"
             app:layout_constraintEnd_toStartOf="@+id/bExit"
             app:layout_constraintHorizontal_bias="0.462" />
 
@@ -505,36 +505,36 @@
 
     </LinearLayout>
 
-<!--    BOTÕES-->
+    <!--    BOTÕES-->
     <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="63dp"
-            android:gravity="center"
-            android:layout_marginTop="5dp">
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="63dp"
+        android:gravity="center"
+        android:layout_marginTop="5dp">
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/bStart"
-                style="@style/Operations_Button"
-                android:layout_width="70dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="2dp"
-                android:background="@drawable/buttons_icon"
-                android:onClick="onClickStart"
-                android:text="Start"
-                app:layout_constraintEnd_toEndOf="@id/bStart"
-                app:layout_constraintHorizontal_bias="0.0" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/bStart"
+            style="@style/Operations_Button"
+            android:layout_width="70dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/buttons_icon"
+            android:onClick="onClickStart"
+            android:text="Start"
+            app:layout_constraintEnd_toEndOf="@id/bStart"
+            app:layout_constraintHorizontal_bias="0.0" />
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/bExit"
-                style="@style/Operations_Button"
-                android:layout_width="70dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="2dp"
-                android:background="@drawable/buttons_icon"
-                android:onClick="onClickExit"
-                android:text="Exit" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/bExit"
+            style="@style/Operations_Button"
+            android:layout_width="70dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/buttons_icon"
+            android:onClick="onClickExit"
+            android:text="Exit" />
 
-        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>
