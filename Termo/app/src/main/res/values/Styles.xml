@@ -36,6 +36,7 @@
     <style name="Keyboard_Button" parent="Keyboard_Style">
         <item name="android:background">@color/gray_buttons</item>
         <item name="android:textColor">@color/white</item>
+        <item name="android:shape">rectangle</item>
     </style>
 
     <style name="Operations_Button" parent="Buttons_Style">

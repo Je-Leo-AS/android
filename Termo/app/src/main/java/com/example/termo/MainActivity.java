@@ -7,7 +7,6 @@ import androidx.appcompat.widget.AppCompatTextView;
 
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import java.io.InputStream;
@@ -15,9 +14,6 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 import android.widget.TextView;
-import android.graphics.Color;
-
-import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
     private boolean secretWordCondition = true;
@@ -39,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
         random = new Random();
         banco = Banco.getInstance();
+        onClickStart();
     }
 
     private void readCSV() {
@@ -62,23 +59,36 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void onClickStart(View view) {
-        Button button = findViewById(R.id.bStart);
+    public void onClickRestart(){
+        if(isGameStarted()) {
+            Toast.makeText(getApplicationContext(), "Game Restarted", Toast.LENGTH_LONG).show();
+            setGameStart(false);
+            setSecretWordCondition(true);
+            for (int i = 0; i < letterClick; i++) {
+                int textViewId = getResources().getIdentifier("tvLetter" + enterClick + letterClick, "id", getPackageName());
+                AppCompatTextView textView = findViewById(textViewId);
+                textView.setText("");
+                readCSV();
+                setGameStart(true);
+                setSecretWordCondition(false);
+            }
+            letterClick = 1;
+        }
+    }
+    public void onClickStart() {
+
+
 
         if(!isGameStarted()) {
             readCSV();
             setGameStart(true);
             setSecretWordCondition(false);
-            button.setBackgroundResource(R.drawable.gray_icon);
-            button.setTextAppearance(R.style.TextView_Style);
-            button.setText("STARTED");
-            button.setTextColor(getResources().getColor(R.color.red_C));
         }
         else if(!isGameStarted() && isGameOver()){
             Toast.makeText(getApplicationContext(), "GameOver", Toast.LENGTH_LONG).show();
         }
         else{
-            Toast.makeText(getApplicationContext(), "Game Started: " + wordSecret, Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Game Started", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -88,21 +98,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
       public void onClickClear(View view) {
-        if(!isGameOver()) {
-            letters[letterClick - 1] = null;
+        if(!isGameOver() & letterClick > 1) {
+            letterClick = letterClick - 1;
+            letters[letterClick - 1] = "";
 
             int textViewId = getResources().getIdentifier("tvLetter" + enterClick + letterClick, "id", getPackageName());
             AppCompatTextView textView = findViewById(textViewId);
 
+
             if (letters[letterClick - 1] != null) {
                 String text = textView.getText().toString();
                 textView.setText(letters[letterClick - 1].toString());
+                // Toast.makeText(getApplicationContext(), "text : " + text, Toast.LENGTH_SHORT).show();
+                textView.setText(""); // Define o texto do textView como vazio
             }
             else {
                 textView.setText(""); // Define o texto do textView como vazio
             }
         } else {
-            System.out.println("GameOver");
+            Toast.makeText(getApplicationContext(), "Insert a Letter", Toast.LENGTH_SHORT).show();
+
+            // System.out.println("GameOver");
         }
     }
     public void onClickTextView(View view) {
@@ -164,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickEnter(View view)
     {
-        if (isSecretWordNull()){ // Verificar se foi sorteado uma palavra do banco
+        if (isSecretWordNull()){
             Toast.makeText(getApplicationContext(), "Start Game", Toast.LENGTH_LONG).show();
             return;
         }
