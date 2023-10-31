@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
     private double num1;
     private double num2 = 0;
-    private double ans = 0;
+
     private char operation = ' ';
     public String operationAct;
     private double result;
@@ -102,8 +104,8 @@ public class MainActivity extends AppCompatActivity {
         // Chamada da função performCalculation com a operação
         performCalculation(operationAct);
 
-        // Formatar o resultado para exibir apenas duas casas decimais
-        DecimalFormat decimalFormat = new DecimalFormat("#.##");
+
+        DecimalFormat decimalFormat = new DecimalFormat("#.##", new DecimalFormatSymbols(Locale.US));
         String formattedResult = decimalFormat.format(result);
 
         // Atualização do TextView com o resultado formatado
