@@ -5,12 +5,15 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatTextView;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 import android.widget.TextView;
@@ -20,13 +23,15 @@ public class MainActivity extends AppCompatActivity {
     private boolean gameOverCondition = false;
     private boolean tryWordCondition = false;
     public String[] letters = new String[5];
+    public List<String> valores = new ArrayList<>();
     private boolean gameStarted = false;
-    int letterClick = 1;
+    int letterClick = 0;
     int enterClick = 1;
     String wordSecret;
     String tryWord;
     Random random;
     Banco banco;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +46,9 @@ public class MainActivity extends AppCompatActivity {
     private void readCSV() {
         try {
             String palavra = null;
-            int pos = 1 + random.nextInt(86);
+            Log.d("Read csv","Begin Read csv");
+
+            int pos = 1 + random.nextInt(26);
             InputStream inputStream = getApplicationContext().getResources().openRawResource(R.raw.palavras_termo);
             Scanner scanner = new Scanner(inputStream);
             for (int i = 1; i <= pos; i++)
@@ -55,10 +62,27 @@ public class MainActivity extends AppCompatActivity {
             scanner.close();
         }
         catch (Exception e) {
-            Toast.makeText(getApplicationContext(), "Something Wrong: " + e.getMessage(), Toast.LENGTH_LONG).show();
+            Log.e("Read csv", "Something Wrong: " + e.getMessage());
+
         }
     }
+    private void readBanco() {
+        try {
+            InputStream inputStream = getApplicationContext().getResources().openRawResource(R.raw.palavras_completo);
+            Scanner scanner = new Scanner(inputStream);
+            Log.d("Read Banco", "Begin Read banco");
 
+            while (scanner.hasNextLine()) {
+                String linha = scanner.nextLine();
+                String[] colunas = linha.split("\\s*;\\s*");
+                Log.d("Read Banco", "WordRead: " + colunas[1]);
+                valores.add(colunas[1]);
+            }
+        }
+        catch (Exception e) {
+            Log.e("Read Banco", "Something Wrong: " + e.getMessage());
+        }
+    }
     public void onClickRestart(){
         if(isGameStarted()) {
             Toast.makeText(getApplicationContext(), "Game Restarted", Toast.LENGTH_LONG).show();
@@ -72,15 +96,14 @@ public class MainActivity extends AppCompatActivity {
                 setGameStart(true);
                 setSecretWordCondition(false);
             }
-            letterClick = 1;
+            letterClick = 0;
+
         }
     }
     public void onClickStart() {
-
-
-
         if(!isGameStarted()) {
             readCSV();
+            readBanco();
             setGameStart(true);
             setSecretWordCondition(false);
         }
@@ -92,34 +115,31 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void onClickExit(View view){
-        System.out.println("Closing app...");
-        System.exit(0);
-    }
-
       public void onClickClear(View view) {
-        if(!isGameOver() & letterClick > 1) {
-            letterClick = letterClick - 1;
+        if(!isGameOver() && letterClick > 0) {
+
             letters[letterClick - 1] = "";
 
             int textViewId = getResources().getIdentifier("tvLetter" + enterClick + letterClick, "id", getPackageName());
             AppCompatTextView textView = findViewById(textViewId);
 
 
-            if (letters[letterClick - 1] != null) {
+            if (letters[letterClick - 1] != "") {
                 String text = textView.getText().toString();
                 textView.setText(letters[letterClick - 1].toString());
-                // Toast.makeText(getApplicationContext(), "text : " + text, Toast.LENGTH_SHORT).show();
-                textView.setText(""); // Define o texto do textView como vazio
+                textView.setText("");
             }
             else {
-                textView.setText(""); // Define o texto do textView como vazio
+                textView.setText("");
             }
         } else {
             Toast.makeText(getApplicationContext(), "Insert a Letter", Toast.LENGTH_SHORT).show();
-
-            // System.out.println("GameOver");
         }
+        if(letterClick > 0){
+            letterClick--;
+        }
+
+
     }
     public void onClickTextView(View view) {
         int textViewId = view.getId();
@@ -136,23 +156,25 @@ public class MainActivity extends AppCompatActivity {
             letterClick = column;
         }
     }
-
     public void verifyTryWord() {
-        for(int i = 0; i < 5; i++) // Percorre todas as posições, de 0 até 4, do vetor
-        {
-            if(letters[i] == null || letters[i].isEmpty() ) // Verifica se a posição i está vazia ou nula:
+            for (int i = 0; i < 5; i++)
             {
-                setValidWord(false); // Seta a palavra tentada como inválida
-                break; // Sai do for na posição i
+                if (letters[i] == null || letters[i].isEmpty())
+                {
+                    setValidWord(false);
+                    break;
+                } else {
+                    setValidWord(true);
+                }
             }
-            else {
-                setValidWord(true); // Seta a palavra tentada como válida
-            }
-        }
+
     }
     public void onClickLetter(View view)
     {
         if(!isGameOver()) {
+            if (letterClick<5){
+                letterClick++;
+            }
             Button button = (Button) view;
             String buttonText = button.getText().toString();
 
@@ -164,30 +186,32 @@ public class MainActivity extends AppCompatActivity {
             String text = textView.getText().toString();
             textView.setText(buttonText.toString());
 
-            verifyTryWord();
 
-            if (isValidWord()) {
-                tryWord = letters[0] + letters[1] + letters[2] + letters[3] + letters[4];
+            if (letterClick > 5){
+
+                letterClick = 5;
             }
 
-            if (letterClick < 5) {
-                letterClick++;
-            } else {
-                letterClick = 1;
-            }
         }
     }
 
     public void onClickEnter(View view)
     {
+        verifyTryWord();
+        if (isValidWord()) {
+            tryWord = letters[0] + letters[1] + letters[2] + letters[3] + letters[4];
+        }
+        //Toast.makeText(getApplicationContext(), "TryWord: " + tryWord, Toast.LENGTH_LONG).show();
+        if (!valores.contains(tryWord)){
+            Toast.makeText(getApplicationContext(), "Invalid Word", Toast.LENGTH_LONG).show();
+            return;
+        }
         if (isSecretWordNull()){
             Toast.makeText(getApplicationContext(), "Start Game", Toast.LENGTH_LONG).show();
             return;
         }
-
         boolean[] letterMatched = new boolean[5];
         Arrays.fill(letterMatched, false);
-
         if(tryWord == wordSecret){
             Toast.makeText(getApplicationContext(), "GameOver", Toast.LENGTH_LONG).show();
             return;
@@ -203,6 +227,7 @@ public class MainActivity extends AppCompatActivity {
                 {
                     char letterWordSecret = wordSecret.charAt(j);
 
+                    // Log.d("click enter", wordSecret);
                     int editViewId = getResources().getIdentifier("tvLetter" + (enterClick) + (i + 1), "id", getPackageName());
                     TextView editView = findViewById(editViewId);
 
@@ -232,9 +257,10 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             }
+
             Arrays.fill(letters, null);
             enterClick++;
-            letterClick = 1;
+            letterClick = 0;
             setValidWord(false);
             if(enterClick < 7)
                 startIconColor();
@@ -289,7 +315,7 @@ public class MainActivity extends AppCompatActivity {
     public void setGrayKeyboardButton(Button button){
         button.setBackgroundResource(R.drawable.gray_icon);
         button.setTextAppearance(R.style.TextView_Style);
-        button.setEnabled(false);
+        button.setEnabled(true);
     }
 
     public boolean isSecretWordNull()
