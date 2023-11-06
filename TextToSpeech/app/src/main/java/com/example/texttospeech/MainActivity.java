@@ -240,9 +240,6 @@ class Tree {
         return items;
     }
 }
-void Start(){
-
-}
 
 
 
