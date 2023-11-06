@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "979885893236",
+    "project_id": "texttospeech-38b88",
+    "storage_bucket": "texttospeech-38b88.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:979885893236:android:a78bc68ab61fa0ce2d1321",
+        "android_client_info": {
+          "package_name": "com.example.texttospeech"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANEYun6QSZ9E7aNe-s-YIHY2-CoM7u2co"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
