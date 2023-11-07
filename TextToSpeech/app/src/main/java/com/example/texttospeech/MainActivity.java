@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
         btnGenerateText = findViewById(R.id.btnLis);
         btnSave = findViewById(R.id.btnSave);
         etText = findViewById(R.id.et);
+        listView = findViewById(R.id.listView);
 
         CollectionReference collectionReference = firestore.collection("textos");
         Task<QuerySnapshot> query = collectionReference.get();
@@ -120,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        ListView listView = findViewById(R.id.listView);
+
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -130,6 +131,23 @@ public class MainActivity extends AppCompatActivity {
                 String Frase = palavrasSplit[0].toString();
                 etText.setText(Frase);
 
+            }
+        });
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                // Verifique se o item está sendo segurado
+                if (view.isPressed()) {
+                    // Remova o item do listview
+                    String value = (String) adapter.getItem(position);
+                    items.remove(value);
+                    final ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, items);
+                    listView.setAdapter(adapter);
+                    firestore.collection("textos").document("textdata " + position).delete();
+                    contador--;
+                    return true;
+                }
+                return false;
             }
         });
 
@@ -150,6 +168,7 @@ public class MainActivity extends AppCompatActivity {
                 Item item1 = new Item("item" + contador, item);
                 tree.addItem(item1);
                 documentReference = firestore.collection("textos").document("textdata "+contador);
+
 
                 contador++;
                 documentReference.set(item).addOnSuccessListener(new OnSuccessListener<Void>() {
