@@ -101,17 +101,12 @@ public class MainActivity extends AppCompatActivity {
             newInput = true;
         }
 
-        // Chamada da função performCalculation com a operação
         performCalculation(operationAct);
-
-
         DecimalFormat decimalFormat = new DecimalFormat("#.##", new DecimalFormatSymbols(Locale.US));
         String formattedResult = decimalFormat.format(result);
 
-        // Atualização do TextView com o resultado formatado
         resultTextView.setText(formattedResult);
 
-        // Limpeza da entrada
         input.setLength(0);
         input.append(formattedResult);
     }

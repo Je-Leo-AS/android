@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-      public void onClickClear(View view) {
+    public void onClickClear(View view) {
         if(!isGameOver() && letterClick > 0) {
 
             letters[letterClick - 1] = "";
@@ -169,8 +169,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
     }
-    public void onClickLetter(View view)
-    {
+    public void onClickLetter(View view) {
         if(!isGameOver()) {
             if (letterClick<5){
                 letterClick++;
@@ -195,8 +194,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void onClickEnter(View view)
-    {
+    public void onClickEnter(View view) {
         verifyTryWord();
         if (isValidWord()) {
             tryWord = letters[0] + letters[1] + letters[2] + letters[3] + letters[4];
