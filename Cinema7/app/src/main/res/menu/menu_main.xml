@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/miAlpha"
+        android:icon="@drawable/ic_sort_alphabetical"
+        app:showAsAction="always"
+        android:title="Ordem alfabética" />
+
+    <item
+        android:id="@+id/miCrono"
+        android:icon="@drawable/ic_sort_time"
+        app:showAsAction="always"
+        android:title="Ordem cronológica" />
+
+    <item
+        android:id="@+id/miConfig"
+        app:showAsAction="never"
+        android:title="Configurações">
+
+        <menu>
+            <item
+                android:id="@+id/miBackUp"
+                android:title="Backup"/>
+
+            <item
+                android:id="@+id/miSincronizar"
+                android:title="Sincronizar"/>
+
+        </menu>
+    </item>
+
+    <item
+        android:id="@+id/miSobre"
+        android:title="Sobre" />
+
+</menu>
